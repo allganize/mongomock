@@ -1043,8 +1043,8 @@ class Collection(object):
             for item in obj:
                 new.append(self._copy_field(item, container))
             return new
-        if isinstance(obj, dict):
-            new = container()
+        if isinstance(obj, (dict, collections.OrderedDict)):
+            new = obj.__class__()
             for key, value in obj.items():
                 new[key] = self._copy_field(value, container)
             return new

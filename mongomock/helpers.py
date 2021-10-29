@@ -344,8 +344,11 @@ def make_datetime_timezone_aware_in_document(value):
     # MongoClient support tz_aware=True parameter to return timezone-aware
     # datetime objects. Given the date is stored internally without timezone
     # information, all returned datetime have utc as timezone.
-    if isinstance(value, dict):
-        return {k: make_datetime_timezone_aware_in_document(v) for k, v in value.items()}
+    for best_type in (OrderedDict, dict):
+        if isinstance(value, best_type):
+            return best_type(
+                (k, make_datetime_timezone_aware_in_document(v))
+                for k, v in value.items())
     if isinstance(value, (tuple, list)):
         return [make_datetime_timezone_aware_in_document(item) for item in value]
     if isinstance(value, datetime):

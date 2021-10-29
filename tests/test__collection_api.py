@@ -6382,15 +6382,15 @@ class CollectionAPITest(TestCase):
         collection = self.db.collection
 
         collection.insert_many([
-            {'_id': 1, 'item': 'ABC1', 'dimensions': collections.OrderedDict({
-                'l': 25, 'w': 10, 'uom': 'cm',
-            })},
-            {'_id': 2, 'item': 'ABC2', 'dimensions': collections.OrderedDict({
-                'l': 50, 'w': 25, 'uom': 'cm',
-            })},
-            {'_id': 3, 'item': 'XYZ1', 'dimensions': collections.OrderedDict({
-                'l': 70, 'w': 75, 'uom': 'cm',
-            })},
+            {'_id': 1, 'item': 'ABC1', 'dimensions': collections.OrderedDict([
+                ('l', 25), ('w', 10), ('uom', 'cm'),
+            ])},
+            {'_id': 2, 'item': 'ABC2', 'dimensions': collections.OrderedDict([
+                ('l', 50), ('w', 25), ('uom', 'cm'),
+            ])},
+            {'_id': 3, 'item': 'XYZ1', 'dimensions': collections.OrderedDict([
+                ('l', 70), ('w', 75), ('uom', 'cm'),
+            ])},
         ])
 
         expect = [
